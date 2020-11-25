@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TodoList} from "./TodoList";
+import {TaskType, TodoList} from "./TodoList";
 import {v1} from "uuid";
 import {Simulate} from "react-dom/test-utils";
 import {AddItemForm} from "./AddItemForm";
@@ -72,13 +72,16 @@ function App() {
         delete tasksObj[todoListId]
         setTasks({...tasksObj})
     }
+    type TaskStateType ={
+        [key:string]:Array<TaskType>
+    }
 
-    let [tasksObj, setTasks] = useState({
+    let [tasksObj, setTasks] = useState<TaskStateType>({
         [todoListId1]: [
             {id: v1(), title: "CSS", isDone: true},
             {id: v1(), title: "HTML", isDone: true},
             {id: v1(), title: "React", isDone: false},
-            {id: v1(), title: "rest api", isDone: false},
+            {id: v1(), title: "Rest api", isDone: false},
             {id: v1(), title: "graphQL", isDone: false}],
         [todoListId2]: [
             {id: v1(), title: "Book", isDone: true},
