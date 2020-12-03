@@ -1,2 +1,4 @@
 [1103/194558.538:ERROR:exit_code_watcher_win.cc(87)] Failed to wait for process exit or stop event
 [1108/152825.894:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
+[1125/184427.938:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
+[1126/210853.216:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)

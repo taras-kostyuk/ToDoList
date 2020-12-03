@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, TodoList} from "./TodoList";
 import {v1} from "uuid";
-import {Simulate} from "react-dom/test-utils";
 import {AddItemForm} from "./AddItemForm";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {Menu} from "@material-ui/icons";
 
 
 export type FilterValueType = "all" | "active" | "completed"
@@ -136,35 +137,64 @@ function App() {
 
 
         <div className="App">
-            <AddItemForm addItem={addTodoList}/>
-            {
-                todoLists.map((tl) => {
-
-                    let tasksForTodoList = tasksObj[tl.id]
-                    if (tl.filter === "active") {
-                        tasksForTodoList = tasksForTodoList.filter(t => t.isDone === false);
-                    }
-                    if (tl.filter === "completed") {
-                        tasksForTodoList = tasksForTodoList.filter(t => t.isDone === true)
-                    }
-
-                    return <TodoList
-                        removeTodoList={removeTodoList}
-                        key={tl.id}
-                        id={tl.id}
-                        title={tl.title}
-                        tasks={tasksForTodoList}
-                        removeTask={removeTask}
-                        changeFilter={changeFilter}
-                        addTask={addTask}
-                        changeTaskStatus={changeStatus}
-                        changeTaskTitle={changeTaskTitle}
-                        filter={tl.filter}
-                        changeTodoListTitle={changeTodoListTitle}
-                    />
-                })}
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" arial-label="menu">
+                        <Menu/>
 
 
+                    </IconButton>
+
+                    <Typography variant="h6">
+                        News
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+
+
+                </Toolbar>
+
+
+            </AppBar>
+
+            <Container fixed>
+                <Grid container style={{padding: "20px"}}>
+                    <AddItemForm addItem={addTodoList}/>
+                </Grid>
+                <Grid container spacing={3}>
+                    {
+                        todoLists.map((tl) => {
+
+                            let tasksForTodoList = tasksObj[tl.id]
+                            if (tl.filter === "active") {
+                                tasksForTodoList = tasksForTodoList.filter(t => t.isDone === false);
+                            }
+                            if (tl.filter === "completed") {
+                                tasksForTodoList = tasksForTodoList.filter(t => t.isDone === true)
+                            }
+
+                            return (
+                                <Grid item>
+                                    <Paper style={{padding:"10 px"}}>
+                                        <TodoList
+                                            removeTodoList={removeTodoList}
+                                            key={tl.id}
+                                            id={tl.id}
+                                            title={tl.title}
+                                            tasks={tasksForTodoList}
+                                            removeTask={removeTask}
+                                            changeFilter={changeFilter}
+                                            addTask={addTask}
+                                            changeTaskStatus={changeStatus}
+                                            changeTaskTitle={changeTaskTitle}
+                                            filter={tl.filter}
+                                            changeTodoListTitle={changeTodoListTitle}
+                                        />
+                                    </Paper>
+                                </Grid>
+                            )
+                        })}
+                </Grid>
+            </Container>
         </div>
     );
 }
